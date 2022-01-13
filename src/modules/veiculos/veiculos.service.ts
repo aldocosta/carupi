@@ -35,8 +35,17 @@ export class VeiculosService {
         return await this.veiculosModel.deleteOne({ _id: veiculoId })
     }
 
-    async find() {
-        return await this.veiculosModel.find()
+    async find(query: any) {
+
+        let precoVenda = {
+            $gte: 3000,
+            $lte: query.precoMin || 0
+        }
+
+        delete query.precoMax
+        query.precoVenda = precoVenda
+        console.log(query)
+        return await this.veiculosModel.find(query)
     }
 
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, HttpException, HttpStatus, Param, Post, Put, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, ValidationPipe } from '@nestjs/common';
 import { VeiculosDTO } from './dto/veiculos.dto';
 import { VeiculosDocument } from './veiculos.model';
 import { VeiculosService } from './veiculos.service';
@@ -42,7 +42,10 @@ export class VeiculosController {
         }
     }
 
-    // async find() {
-    //     return await this.cervejaModel.find()
-    // }
+    @Get()
+    async find(
+        @Query() params: string
+    ) {        
+        return await this.veiculoSvc.find(params)
+    }
 }
