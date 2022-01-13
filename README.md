@@ -31,6 +31,41 @@
 ```bash
 $ npm install
 ```
+If you are using Docker for mongodb
+
+```
+$ docker run --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=balta -e MONGO_INITDB_ROOT_PASSWORD=e296cd9f mongo    
+```
+
+then create the user
+
+```
+$ db.createUser(
+   {
+     user: "balta",
+     pwd: "e296cd9f",
+     
+     roles: [{"role":"readWrite","db":"carupi"}],
+    /* All built-in Roles 
+     Database User Roles: read|readWrite
+     Database Admin Roles: dbAdmin|dbOwner|userAdmin
+     Cluster Admin Roles: clusterAdmin|clusterManager|clusterMonitor|hostManager
+     Backup and Restoration Roles: backup|restore
+     All-Database Roles: readAnyDatabase|readWriteAnyDatabase|userAdminAnyDatabase|dbAdminAnyDatabase
+     Superuser Roles: root 
+    */
+    
+    // authenticationRestrictions: [ {
+    //     clientSource: ["192.168.0.0"],
+    //     serverAddress: ["xxx.xxx.xxx.xxx"]
+    //  } ],
+
+    //mechanisms: [ "<SCRAM-SHA-1|SCRAM-SHA-256>", ... ], 
+
+    //passwordDigestor: "<server|client>"
+   }
+)
+```
 
 ## Running the app
 
